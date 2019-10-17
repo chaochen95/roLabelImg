@@ -18,10 +18,9 @@ It is written in Python and uses Qt for its graphical interface.
 .. image:: https://raw.githubusercontent.com/cgvict/roLabelImg/master/demo/demo4.png
      :alt: Demo Image
 
-.. image:: https://raw.githubusercontent.com/cgvict/roLabelImg/master/demo/roLabelImg.gif
-
 Annotations are saved as XML files almost like PASCAL VOC format, the format used by `ImageNet <http://www.image-net.org/>`__.
 
+Now can get the original 4 points of the rotbox
 
 XML Format
 ------------------
@@ -66,6 +65,14 @@ XML Format
           <w>775.0449</w>
           <h>170.2159</h>
           <angle>2.889813</angle>
+	  <p1x>613.2307</p1x>
+	  <p1y>835.446</p1y>
+	  <p2x>470.1874</p2x>
+	  <p2y>864.6796</p2y>
+	  <p3x>374.077</p3x>
+	  <p3y>394.4001</p3y>
+	  <p4x>517.1203</p4x>
+	  <p4y>365.1665</p4y>
         </robndbox>
       </object>
     </annotation>
