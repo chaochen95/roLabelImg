@@ -108,12 +108,22 @@ class PascalVocWriter:
 
     # You Hao 2017/06/21
     # add to analysis robndbox
+    '''
     def addRotatedBndBox(self, cx, cy, w, h, angle, name, difficult):
         robndbox = {'cx': cx, 'cy': cy, 'w': w, 'h': h, 'angle': angle}
         robndbox['name'] = name
         robndbox['difficult'] = difficult
         self.roboxlist.append(robndbox)
-
+    '''
+    # CC Wang 2019/10/17
+    #return with 8 points
+    def addRotatedBndBox(self, cx, cy, w, h, angle, p1x, p1y, p2x, p2y, p3x, p3y, p4x, p4y, name, difficult):
+        robndbox = {'cx': cx, 'cy': cy, 'w': w, 'h': h, 'angle': angle,
+        'p1x': p1x, 'p1y': p1y, 'p2x': p2x, 'p2y': p2y, 'p3x': p3x, 'p3y': p3y, 'p4x': p4x, 'p4y': p4y}
+        robndbox['name'] = name
+        robndbox['difficult'] = difficult
+        self.roboxlist.append(robndbox)
+    
     def appendObjects(self, top):
         for each_object in self.boxlist:
             object_item = SubElement(top, 'object')
@@ -148,6 +158,8 @@ class PascalVocWriter:
 
         # You Hao 2017/06/21
         # add to store robndbox
+        # CC Wang 2019/10/17
+        # add to store original 4 points 
         for each_object in self.roboxlist:
             object_item = SubElement(top, 'object')
             typeItem = SubElement(object_item, 'type')
@@ -180,6 +192,22 @@ class PascalVocWriter:
             h.text = str(each_object['h'])
             angle = SubElement(robndbox, 'angle')
             angle.text = str(each_object['angle'])
+            p1x = SubElement(robndbox, 'p1x')
+            p1x.text = str(each_object['p1x'])
+            p1y = SubElement(robndbox, 'p1y')
+            p1y.text = str(each_object['p1y'])
+            p2x = SubElement(robndbox, 'p2x')
+            p2x.text = str(each_object['p2x'])
+            p2y = SubElement(robndbox, 'p2y')
+            p2y.text = str(each_object['p2y'])
+            p3x = SubElement(robndbox, 'p3x')
+            p3x.text = str(each_object['p3x'])
+            p3y = SubElement(robndbox, 'p3y')
+            p3y.text = str(each_object['p3y'])
+            p4x = SubElement(robndbox, 'p4x')
+            p4x.text = str(each_object['p4x'])
+            p4y = SubElement(robndbox, 'p4y')
+            p4y.text = str(each_object['p4y'])
 
     def save(self, targetFile=None):
         root = self.genXML()
@@ -235,8 +263,8 @@ class PascalVocReader:
         self.shapes.append((label, points, angle, True, None, None, difficult))
 
     def rotatePoint(self, xc,yc, xp,yp, theta):        
-        xoff = xp-xc;
-        yoff = yp-yc;
+        xoff = xp-xc
+        yoff = yp-yc
 
         cosTheta = math.cos(theta)
         sinTheta = math.sin(theta)

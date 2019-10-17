@@ -59,9 +59,17 @@ class LabelFile(object):
                     bndbox[3], label, difficult)
             else: #if shape is rotated box, save as rotated bounding box
                 robndbox = LabelFile.convertPoints2RotatedBndBox(shape)
+                
+                '''
                 writer.addRotatedBndBox(robndbox[0],robndbox[1],
                     robndbox[2],robndbox[3],robndbox[4],label,difficult)
-
+                '''
+                # CC Wang 2019/10/17
+                writer.addRotatedBndBox(robndbox[0],robndbox[1],
+                    robndbox[2],robndbox[3],robndbox[4],
+                    robndbox[5],robndbox[6],robndbox[7],robndbox[8],
+                    robndbox[9],robndbox[10],robndbox[11],robndbox[12],
+                    label,difficult)
         writer.save(targetFile=filename)
         return
 
@@ -99,6 +107,7 @@ class LabelFile(object):
         return (int(xmin), int(ymin), int(xmax), int(ymax))
 
     # You Hao, 2017/06/121
+    # CC Wang, 2019/10/17 
     @staticmethod
     def convertPoints2RotatedBndBox(shape):
         points = shape['points']
@@ -116,4 +125,7 @@ class LabelFile(object):
 
         angle = direction % math.pi
 
-        return (round(cx,4),round(cy,4),round(w,4),round(h,4),round(angle,6))
+        #return (round(cx,4),round(cy,4),round(w,4),round(h,4),round(angle,6))
+        return (round(cx,4),round(cy,4),round(w,4),round(h,4),round(angle,6),
+            round(points[0][0],4),round(points[0][1],4),round(points[1][0],4),round(points[1][1],4),
+            round(points[2][0],4),round(points[2][1],4),round(points[3][0],4),round(points[3][1],4))
