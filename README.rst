@@ -20,7 +20,7 @@ It is written in Python and uses Qt for its graphical interface.
 
 Annotations are saved as XML files almost like PASCAL VOC format, the format used by `ImageNet <http://www.image-net.org/>`__.
 
-Now can get the original 4 points of the rotbox
+Now can get the original 4 points of the rotbox and read the label of previous image
 
 XML Format
 ------------------
@@ -202,6 +202,8 @@ Hotkeys
 +------------+--------------------------------------------+
 | a          | Previous image                             |
 +------------+--------------------------------------------+
+| s          | Read the Label of Previous image           |
++------------+--------------------------------------------+
 | r          | Hidden/Show Rotated Rect boxes             |
 +------------+--------------------------------------------+
 | n          | Hidden/Show Normal Rect boxes              |
@@ -212,7 +214,7 @@ Hotkeys
 +------------+--------------------------------------------+
 | Ctrl--     | Zoom out                                   |
 +------------+--------------------------------------------+
-| ↑→↓←       | Keyboard arrows to move selected rect box  |
+| ↑→↓←         | Keyboard arrows to move selected rect box  |
 +------------+--------------------------------------------+
 | zxcv       | Keyboard to rotate selected rect box       |
 +------------+--------------------------------------------+
