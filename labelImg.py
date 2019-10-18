@@ -220,7 +220,10 @@ class MainWindow(QMainWindow, WindowMixin):
 
         openAnnotation = action('&Open Annotation', self.openAnnotation,
                                 'Ctrl+Shift+O', 'openAnnotation', u'Open Annotation')
-
+        # CC Wang 2019/10/17
+        openPrevLable = action('&Prev Lable', self.openPrevLable,
+                             's', 'openPrevLable', u'openP rev Lable')
+        
         openNextImg = action('&Next Image', self.openNextImg,
                              'd', 'next', u'Open Next')
 
@@ -357,7 +360,7 @@ class MainWindow(QMainWindow, WindowMixin):
             labelList=labelMenu)
 
         addActions(self.menus.file,
-                   (open, opendir, changeSavedir, openAnnotation, self.menus.recentFiles, save, saveAs, close, None, quit))
+                   (open, opendir, changeSavedir, openAnnotation,openPrevLable, self.menus.recentFiles, save, saveAs, close, None, quit))
         addActions(self.menus.help, (help,))
         addActions(self.menus.view, (
             labels, advancedMode, None,
@@ -375,7 +378,7 @@ class MainWindow(QMainWindow, WindowMixin):
 
         self.tools = self.toolbar('Tools')
         self.actions.beginner = (
-            open, opendir, openNextImg, openPrevImg, verify, save, None, create, createRo, copy, delete, None,
+            open, opendir, openNextImg, openPrevImg, verify,openPrevLable, save, None, create, createRo, copy, delete, None,
             zoomIn, zoom, zoomOut, fitWindow, fitWidth)
 
         self.actions.advanced = (
@@ -1057,7 +1060,39 @@ class MainWindow(QMainWindow, WindowMixin):
             if filename:
                 if isinstance(filename, (tuple, list)):
                     filename = filename[0]
+
+            filename = ustr(filename)
             self.loadPascalXMLByFilename(filename)
+
+    #CC Wang 2010/10/17
+    def openPrevLable(self, _value=False):
+        if not self.mayContinue():
+            return
+
+        if len(self.mImgList) <= 0:
+            return
+
+        if self.filePath is None:
+            return
+
+        currIndex = self.mImgList.index(self.filePath)
+        if currIndex - 1 >= 0:
+            filename = self.mImgList[currIndex - 1]
+            if filename:
+                if self.usingPascalVocFormat is True:
+                    if self.defaultSaveDir is not None:
+                        basename = os.path.basename(
+                            os.path.splitext(filename)[0]) + XML_EXT
+                        xmlPath = os.path.join(self.defaultSaveDir, basename)
+                        self.loadPascalXMLByFilename(xmlPath)
+                    else:
+                        xmlPath = filename.split(".")[0] + XML_EXT
+                        if os.path.isfile(xmlPath):
+                            self.loadPascalXMLByFilename(xmlPath)
+
+        if self.filePath is None:
+            return
+            
 
     def openDir(self, _value=False):
         if not self.mayContinue():
@@ -1284,7 +1319,6 @@ class MainWindow(QMainWindow, WindowMixin):
             return
         if os.path.isfile(xmlPath) is False:
             return
-
         tVocParseReader = PascalVocReader(xmlPath)
         shapes = tVocParseReader.getShapes()
         self.loadLabels(shapes)

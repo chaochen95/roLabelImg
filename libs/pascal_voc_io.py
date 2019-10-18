@@ -274,6 +274,8 @@ class PascalVocReader:
         return xc+pResx,yc+pResy
 
     def parseXML(self):
+        #print(type(self.filepath))
+        
         assert self.filepath.endswith(XML_EXT), "Unsupport file format"
         parser = etree.XMLParser(encoding='utf-8')
         xmltree = ElementTree.parse(self.filepath, parser=parser).getroot()
