@@ -214,7 +214,7 @@ Hotkeys
 +------------+--------------------------------------------+
 | Ctrl--     | Zoom out                                   |
 +------------+--------------------------------------------+
-| ↑→↓←         | Keyboard arrows to move selected rect box  |
+| ↑→↓←     | Keyboard arrows to move selected rect box  |
 +------------+--------------------------------------------+
 | zxcv       | Keyboard to rotate selected rect box       |
 +------------+--------------------------------------------+
