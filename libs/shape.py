@@ -146,6 +146,15 @@ class Shape(object):
 
             if self.center is not None:
                 center_path = QPainterPath()
+
+                #CC Wang  2019 10 18
+                #add the direction of the obj
+                center_line_path = QPainterPath()
+                center_line_path.moveTo(self.center)
+                center_line_path.lineTo(QPoint((self.points[0].x() + self.points[1].x() )/2,(self.points[0].y() + self.points[1].y() )/2))
+                painter.drawPath(center_line_path)
+                #self.direction
+
                 d = self.point_size / self.scale
                 center_path.addRect(self.center.x() - d / 2, self.center.y() - d / 2, d, d)
                 painter.drawPath(center_path)

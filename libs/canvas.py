@@ -597,6 +597,7 @@ class Canvas(QWidget):
             #draw dialog line of rectangle
             p.setPen(self.lineColor)
             p.drawLine(leftTop.x(),rightBottom.y(),rightBottom.x(),leftTop.y())
+            
 
         self.setAutoFillBackground(True)
         if self.verified:
@@ -851,6 +852,7 @@ class Canvas(QWidget):
         self.repaint()
 
     def loadShapes(self, shapes):
+        #print(shapes)
         self.shapes = list(shapes)
         self.current = None
         self.repaint()

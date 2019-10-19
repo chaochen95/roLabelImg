@@ -743,7 +743,6 @@ class MainWindow(QMainWindow, WindowMixin):
                 shape.line_color = QColor(*line_color)
             if fill_color:
                 shape.fill_color = QColor(*fill_color)
-
         self.canvas.loadShapes(s)
 
     def saveLabels(self, annotationFilePath):
