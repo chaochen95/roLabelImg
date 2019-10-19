@@ -19,9 +19,9 @@ Watch a demo by author cgvict
 Annotations are saved as XML files almost like PASCAL VOC format, the
 format used by [ImageNet](http://www.image-net.org/).
 
-Get the original 4 points of the rotbox 
-Read the label of previous image
-Draw direction line
+Get the original 4 points of the rotbox .
+Read the label of previous image.
+Draw direction line.
 
 XML Format
 ==========
